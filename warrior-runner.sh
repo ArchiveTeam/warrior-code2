@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while ! -f /dev/shm/ready-for-warrior
+while [ ! -f /dev/shm/ready-for-warrior ]
 do
   sleep 1
 done
