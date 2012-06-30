@@ -70,5 +70,6 @@ run-warrior \
   --data-dir /data/data \
   --warrior-hq http://warriorhq.archive.org \
   --port 8001 \
-  > /dev/tty2 2> /dev/tty2
+  > /dev/tty2
+#  2> /dev/tty2
 
