@@ -10,8 +10,10 @@ rm -rf /var/cache/apt/* \
 
 find /usr/share/locale/ -mindepth 1 -maxdepth 1 -type d ! -name "en*" -exec rm -rf {} \;
 
+chmod 777 /data
+
 echo "Zero-filling /data"
-dd if=/data/zero of=/data/fill bs=10M
+dd if=/dev/zero of=/data/fill bs=10M
 rm -f /data/fill
 
 echo "Zero-filling /"
