@@ -21,9 +21,5 @@ echo -e "      ${FG}                                                  ${BG}"
 
 stty -echo
 
-while true ; do
-  sleep 10
-done
-
 echo -ne "\033[0;00;00m"
 
