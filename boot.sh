@@ -63,13 +63,7 @@ mkdir -p /data/data
 
 mkdir -p /home/warrior/projects
 
-./say-hello.sh
+touch /dev/shm/ready-for-warrior
 
-run-warrior \
-  --projects-dir /home/warrior/projects \
-  --data-dir /data/data \
-  --warrior-hq http://warriorhq.archive.org \
-  --port 8001 \
-  > /dev/tty2
-#  2> /dev/tty2
+./say-hello.sh
 
