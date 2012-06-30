@@ -67,3 +67,5 @@ touch /dev/shm/ready-for-warrior
 
 ./say-hello.sh
 
+stop
+
