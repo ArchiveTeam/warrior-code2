@@ -11,5 +11,6 @@ run-warrior \
   --projects-dir /home/warrior/projects \
   --data-dir /data/data \
   --warrior-hq http://warriorhq.archive.org \
-  --port 8001
+  --port 8001 \
+  --real-shutdown
 
