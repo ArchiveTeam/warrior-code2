@@ -12,9 +12,9 @@ find /usr/share/locale/ -mindepth 1 -maxdepth 1 -type d ! -name "en*" -exec rm -
 
 chmod 777 /data
 
-echo "Zero-filling /data"
-dd if=/dev/zero of=/data/fill bs=10M
-rm -f /data/fill
+# echo "Zero-filling /data"
+# dd if=/dev/zero of=/data/fill bs=10M
+# rm -f /data/fill
 
 echo "Zero-filling /"
 dd if=/dev/zero of=/root/fill bs=10M
