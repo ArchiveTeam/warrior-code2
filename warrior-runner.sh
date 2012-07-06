@@ -10,7 +10,7 @@ cd /home/warrior/warrior-code2
 run-warrior \
   --projects-dir /home/warrior/projects \
   --data-dir /data/data \
-  --warrior-hq http://warriorhq.archive.org \
+  --warrior-hq http://warriorhq.archiveteam.org \
   --port 8001 \
   --real-shutdown
 
