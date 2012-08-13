@@ -58,6 +58,7 @@ echo
 
 ./warrior-install.sh
 
+echo "Removing stale data from previous sessions..."
 rm -rf /data/data
 mkdir -p /data/data
 
