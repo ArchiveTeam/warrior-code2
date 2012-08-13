@@ -12,3 +12,14 @@ else
   echo "No need to upgrade the seesaw kit."
 fi
 
+# Check for splash screen support.
+if [ ! -f /etc/modprobe.d/uvesafb.conf ]
+then
+  echo "Installing framebuffer..."
+  sudo apt-get update
+  sudo apt-get -y install v86d
+  sudo sh -c 'echo "uvesafb" >> /etc/modules'
+  sudo sh -c 'echo "options uvesafb mode_option=640x400-32 scroll=ywrap" > /etc/modprobe.d/uvesafb.conf'
+  sudo modprobe uvesafb
+fi
+
