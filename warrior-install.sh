@@ -41,3 +41,6 @@ then
   sudo /etc/init.d/dnsmasq restart
 fi
 
+# Fix a mistake with relative filenames
+rm -rf /home/warrior/warrior-code2/data
+
