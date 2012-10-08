@@ -30,3 +30,14 @@ then
   sudo sed --in-place -r "s/\/dev\/sdb1 \/data ext3 noatime 0 0//" /etc/fstab
 fi
 
+# Install DNS caching
+if [ ! -f /etc/dnsmasq.conf ]
+then
+  sudo apt-get update
+  sudo apt-get -y install dnsmasq
+  sudo sh -c 'echo "listen-address=127.0.0.1" > /etc/dnsmasq.conf'
+  sudo sed --in-place -r "s/^#prepend domain-name-servers 127.0.0.1;/prepend domain-name-servers 127.0.0.1;/" /etc/dhcp/dhclient.conf
+  sudo dhclient
+  sudo /etc/init.d/dnsmasq restart
+fi
+
