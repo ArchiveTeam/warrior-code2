@@ -23,3 +23,10 @@ then
   sudo modprobe uvesafb
 fi
 
+# Remove the old /data mount settings
+if grep -qs "/dev/sdb1 /data" /etc/fstab
+then
+  echo "Disabling /data auto-mount..."
+  sudo sed --in-place -r "s/\/dev\/sdb1 \/data ext3 noatime 0 0//" /etc/fstab
+fi
+

@@ -1,6 +1,6 @@
 #!/bin/bash
 # A small boot script.
-# Pulls the latest code from GitHub, then runs the warrior.
+# Pulls the latest code from GitHub, then runs boot-part-2.sh.
 
 stop() {
   while true
@@ -56,17 +56,5 @@ git show --quiet --pretty="format:Warrior version %h -- %cr"
 echo
 echo
 
-./warrior-install.sh
-
-echo "Removing stale data from previous sessions..."
-rm -rf /data/data
-mkdir -p /data/data
-
-mkdir -p /home/warrior/projects
-
-touch /dev/shm/ready-for-warrior
-
-./say-hello.sh
-
-stop
+./boot-part-2.sh
 
