@@ -21,8 +21,8 @@ echo "Creating a data partition on ${data_disk}..."
 
 # format drive, mount and prepare folders
 echo "Preparing the data partition..."
-mke2fs -t ext4 -E lazy_itable_init=1 ${data_disk}1 &> /dev/null
-mount -t ext4 -o noatime,data=writeback,barrier=0,nobh ${data_disk}1 /data
+mke2fs -t ext4 -O ^has_journal -E lazy_itable_init=1 ${data_disk}1 &> /dev/null
+mount -t ext4 -o noatime,nodiratime,data=writeback,barrier=0,nobh ${data_disk}1 /data
 mkdir /data/data
 chmod 777 /data /data/data
 
