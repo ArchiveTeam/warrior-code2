@@ -44,3 +44,6 @@ fi
 # Fix a mistake with relative filenames
 rm -rf /home/warrior/warrior-code2/data
 
+# Disable mlocate
+sudo rm -f /etc/cron.daily/mlocate
+
