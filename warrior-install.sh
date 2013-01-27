@@ -3,11 +3,12 @@
 
 # Check the seesaw-kit.
 echo "Checking for the latest seesaw kit..."
-SEESAW_VERSION=$( git ls-remote https://github.com/ArchiveTeam/seesaw-kit.git development | cut -f 1 )
+seesaw_branch=$( git rev-parse --abbrev-ref HEAD )
+SEESAW_VERSION=$( git ls-remote https://github.com/ArchiveTeam/seesaw-kit.git ${seesaw_branch} | cut -f 1 )
 if ! sudo pip freeze | grep -q $SEESAW_VERSION
 then
   echo "Upgrading the seesaw kit..."
-  sudo pip install -e "git+https://github.com/ArchiveTeam/seesaw-kit.git@development#egg=seesaw"
+  sudo pip install -e "git+https://github.com/ArchiveTeam/seesaw-kit.git@${seesaw_branch}#egg=seesaw"
 else
   echo "No need to upgrade the seesaw kit."
 fi
