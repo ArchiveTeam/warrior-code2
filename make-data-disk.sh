@@ -7,13 +7,20 @@
 # to connect a new, unformatted disk to the warrior VM.
 
 # unmount the partition
-if grep -qs " /data " /proc/mounts ; then
+if mountpoint -q /data
+then
   umount /data
 fi
 
 # find an unmounted disk
-root_disk=$( mount -l | grep " on / " | cut -d " " -f 1 | grep -o "sd." )
-data_disk=$( ls -1 /dev/sd? | grep -v $root_disk | head -n 1 )
+for device in `blkid -o device`
+do
+  if ! grep -qs "$device" /proc/mounts /proc/swaps
+  then
+    data_disk="$device"
+    break
+  fi
+done
 
 # reset partition table
 echo "Creating a data partition on ${data_disk}..."
