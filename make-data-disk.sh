@@ -13,8 +13,9 @@ then
 fi
 
 # find an unmounted disk
-for device in `blkid -o device`
+for device in /dev/disk/by-path/*
 do
+  device="`readlink -f "$device"`"
   if ! grep -qs "$device" /proc/mounts /proc/swaps
   then
     data_disk="$device"
