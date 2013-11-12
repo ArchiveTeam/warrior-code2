@@ -26,4 +26,4 @@ mount -t ext4 -o noatime,nodiratime,data=writeback,barrier=0,nobh ${data_disk}1 
 mkdir /data/data
 chmod 777 /data /data/data
 
-
+echo "...Done."
