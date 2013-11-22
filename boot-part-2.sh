@@ -10,7 +10,13 @@ stop() {
   done
 }
 ./warrior-install.sh
-sudo ./make-data-disk.sh
+
+if [ -n "$DOCKER" ]
+then
+  sudo mkdir -p /data/data && sudo chown -R warrior: /data
+else
+  sudo ./make-data-disk.sh
+fi
 
 mkdir -p /home/warrior/projects
 
@@ -18,5 +24,8 @@ touch /dev/shm/ready-for-warrior
 
 ./say-hello.sh
 
-stop
+if [ -z "$DOCKER" ]
+then
+  stop
+fi
 
