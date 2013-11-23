@@ -20,7 +20,7 @@ else
 fi
 
 # Check for splash screen support.
-if [ ! -f /etc/modprobe.d/uvesafb.conf ]
+if [ ! -f /etc/modprobe.d/uvesafb.conf ] && [ -z "$DOCKER" ]
 then
   echo "Installing framebuffer..."
   sudo apt-get update
@@ -31,10 +31,13 @@ then
 fi
 
 # Remove the old /data mount settings
-if grep -qs "/dev/sdb1 /data" /etc/fstab
+if [ -z "$DOCKER" ]
 then
-  echo "Disabling /data auto-mount..."
-  sudo sed --in-place -r "s/\/dev\/sdb1 \/data ext3 noatime 0 0//" /etc/fstab
+  if grep -qs "/dev/sdb1 /data" /etc/fstab
+  then
+    echo "Disabling /data auto-mount..."
+    sudo sed --in-place -r "s/\/dev\/sdb1 \/data ext3 noatime 0 0//" /etc/fstab
+  fi
 fi
 
 # Install DNS caching
@@ -44,7 +47,7 @@ then
   sudo apt-get -y install dnsmasq
   sudo sh -c 'echo "listen-address=127.0.0.1" > /etc/dnsmasq.conf'
   sudo sed --in-place -r "s/^#prepend domain-name-servers 127.0.0.1;/prepend domain-name-servers 127.0.0.1;/" /etc/dhcp/dhclient.conf
-  sudo dhclient
+  if [ -z "$DOCKER" ]; then sudo dhclient; fi
   sudo /etc/init.d/dnsmasq restart
 fi
 
