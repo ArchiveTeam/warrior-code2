@@ -3,7 +3,7 @@
 
 # Check the seesaw-kit.
 echo "Checking for the latest seesaw kit..."
-seesaw_branch=$( git rev-parse --abbrev-ref HEAD )
+seesaw_branch=master
 SEESAW_VERSION=$( git ls-remote https://github.com/ArchiveTeam/seesaw-kit.git ${seesaw_branch} | cut -f 1 )
 if ! sudo pip freeze | grep -q $SEESAW_VERSION
 then
