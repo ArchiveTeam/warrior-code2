@@ -2,7 +2,7 @@
 
 WARRIOR=run-warrior2
 
-if type python3 --version > /dev/null 2>&1; then
+if type python3 > /dev/null 2>&1; then
   WARRIOR=run-warrior3
 fi
 
