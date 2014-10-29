@@ -3,7 +3,7 @@
 
 PIP=pip
 
-if type pip3 > /dev/null 2>&1 then
+if type pip3 --version > /dev/null 2>&1; then
   PIP=pip3
 fi
 
