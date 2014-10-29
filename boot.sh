@@ -52,7 +52,7 @@ then
   stop
 fi
 
-git show --quiet --pretty="format:Warrior version %h -- %cr"
+git show --quiet --pretty="format:Warrior version %h -- %cr" | head -n 1
 echo
 echo
 
