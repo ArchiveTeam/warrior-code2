@@ -16,12 +16,12 @@ SEESAW_VERSION=$( git ls-remote https://github.com/ArchiveTeam/seesaw-kit.git ${
 if ! sudo $PIP freeze | grep -q $SEESAW_VERSION
 then
   echo "Upgrading the seesaw kit..."
-  if ! sudo $PIP install -e "git+https://github.com/ArchiveTeam/seesaw-kit.git@${seesaw_branch}#egg=seesaw"
+  if ! sudo $PIP install -e "git+https://github.com/ArchiveTeam/seesaw-kit.git@${seesaw_branch}#egg=seesaw" --upgrade
   then
     # sometimes pip's git pull fails because the local repository
     # is invalid. reset and try again
     sudo rm -rf "/home/warrior/warrior-code2/src/seesaw"
-    sudo $PIP install -e "git+https://github.com/ArchiveTeam/seesaw-kit.git@${seesaw_branch}#egg=seesaw"
+    sudo $PIP install -e "git+https://github.com/ArchiveTeam/seesaw-kit.git@${seesaw_branch}#egg=seesaw" --upgrade
   fi
 else
   echo "No need to upgrade the seesaw kit."
