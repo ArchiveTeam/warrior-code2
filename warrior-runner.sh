@@ -2,7 +2,7 @@
 
 WARRIOR=run-warrior2
 
-if type python3 > /dev/null 2>&1; then
+if type python3 > /dev/null 2>&1 && type run-warrior3 > /dev/null 2>&1 ; then
   WARRIOR=run-warrior3
 fi
 
@@ -19,4 +19,3 @@ $WARRIOR \
   --warrior-hq http://warriorhq.archiveteam.org \
   --port 8001 \
   --real-shutdown
-
