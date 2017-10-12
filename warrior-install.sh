@@ -1,19 +1,27 @@
 #!/bin/bash
 # This script should install/update the warrior, if necessary.
 
+PIP=pip
+
+if type pip3 > /dev/null 2>&1; then
+  PIP=pip3
+fi
+
+echo "Using '$PIP' for pip."
+
 # Check the seesaw-kit.
 echo "Checking for the latest seesaw kit..."
 seesaw_branch=master
 SEESAW_VERSION=$( git ls-remote https://github.com/ArchiveTeam/seesaw-kit.git ${seesaw_branch} | cut -f 1 )
-if ! sudo pip freeze | grep -q $SEESAW_VERSION
+if ! sudo $PIP freeze | grep -q $SEESAW_VERSION
 then
   echo "Upgrading the seesaw kit..."
-  if ! sudo pip install -e "git+https://github.com/ArchiveTeam/seesaw-kit.git@${seesaw_branch}#egg=seesaw"
+  if ! sudo $PIP install -e "git+https://github.com/ArchiveTeam/seesaw-kit.git@${seesaw_branch}#egg=seesaw" --upgrade
   then
     # sometimes pip's git pull fails because the local repository
     # is invalid. reset and try again
     sudo rm -rf "/home/warrior/warrior-code2/src/seesaw"
-    sudo pip install -e "git+https://github.com/ArchiveTeam/seesaw-kit.git@${seesaw_branch}#egg=seesaw"
+    sudo $PIP install -e "git+https://github.com/ArchiveTeam/seesaw-kit.git@${seesaw_branch}#egg=seesaw" --upgrade
   fi
 else
   echo "No need to upgrade the seesaw kit."
