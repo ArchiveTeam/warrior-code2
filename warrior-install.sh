@@ -11,7 +11,7 @@ echo "Using '$PIP' for pip."
 
 
 # Upgrade pip for 2012 warriors
-if pip --version | grep "pip 1.2.1 from /usr/local/bin/python2.6/dist-packages"; then
+if pip --version | grep "pip 1.2.1 from /usr/local/lib/python2.6/dist-packages"; then
     echo "Upgrading pip..."
 
     mkdir -p /tmp/pip/
