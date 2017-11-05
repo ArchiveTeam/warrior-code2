@@ -9,6 +9,29 @@ fi
 
 echo "Using '$PIP' for pip."
 
+
+# Upgrade pip for 2012 warriors
+if pip --version | grep "pip 1.2.1 from /usr/local/bin/python2.6/dist-packages"; then
+    echo "Upgrading pip..."
+
+    mkdir -p /tmp/pip/
+    curl http://warriorhq.archiveteam.org/downloads/pip/get-pip.py > /tmp/pip/get-pip.py
+    curl http://warriorhq.archiveteam.org/downloads/pip/sha1sum.txt > /tmp/pip/sha1sum.txt
+    grep get-pip.py /tmp/pip/sha1sum.txt > /tmp/pip/sha1sum_get_pip.txt
+
+    if (cd /tmp/pip/ && sha1sum --check sha1sum_get_pip.txt); then
+        sudo python /tmp/pip/get-pip.py
+        echo "Reinstalling seesaw..."
+        sudo pip install seesaw --ignore-installed
+        echo "Done! Rebooting..."
+        sudo shutdown -r 1
+    else
+        echo "Pip download could not be validated!"
+        sleep 10
+    fi
+fi
+
+
 # Check the seesaw-kit.
 echo "Checking for the latest seesaw kit..."
 seesaw_branch=$( git rev-parse --abbrev-ref HEAD )
