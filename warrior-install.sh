@@ -23,11 +23,13 @@ if pip --version | grep "pip 1.2.1 from /usr/local/lib/python2.6/dist-packages";
         sudo python /tmp/pip/get-pip.py
         echo "Reinstalling seesaw..."
         sudo pip install seesaw --ignore-installed
-        echo "Done! Rebooting..."
+        echo "Done! Rebooting in 60 seconds..."
         sudo shutdown -r 1
     else
         echo "Pip download could not be validated!"
-        sleep 10
+        echo "You may need to inspect the problem and reboot manually."
+        echo "Pausing for 60 seconds before continuing..."
+        sleep 60
     fi
 fi
 
