@@ -2,6 +2,7 @@
 # This script should install/update the warrior, if necessary.
 
 PIP=pip
+REBOOT_NEEDED=false
 
 if type pip3 > /dev/null 2>&1; then
   PIP=pip3
@@ -23,8 +24,7 @@ if pip --version | grep "pip 1.2.1 from /usr/local/lib/python2.6/dist-packages";
         sudo python /tmp/pip/get-pip.py
         echo "Reinstalling seesaw..."
         sudo pip install seesaw --ignore-installed
-        echo "Done! Rebooting in 60 seconds..."
-        sudo shutdown -r 1
+        REBOOT_NEEDED=true
     else
         echo "Pip download could not be validated!"
         echo "You may need to inspect the problem and reboot manually."
@@ -33,6 +33,21 @@ if pip --version | grep "pip 1.2.1 from /usr/local/lib/python2.6/dist-packages";
     fi
 fi
 
+
+# Upgrade old setuptools to fix DistributionNotFound after new pip install
+if python --version 2>&1 | grep "Python 2." &&
+python -c "import setuptools; print 'v'+setuptools.__version__" | grep "v0.6"
+then
+    echo "Upgrading setuptools..."
+    sudo pip install setuptools --upgrade
+    REBOOT_NEEDED=true
+fi
+
+
+if "$REBOOT_NEEDED"; then
+    echo "Done! Rebooting in 60 seconds..."
+    sudo shutdown -r 1
+fi
 
 # Check the seesaw-kit.
 echo "Checking for the latest seesaw kit..."
