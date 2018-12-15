@@ -16,6 +16,6 @@ cd /home/warrior/warrior-code2
 $WARRIOR \
   --projects-dir /home/warrior/projects \
   --data-dir /data/data \
-  --warrior-hq http://warriorhq.archiveteam.org \
+  --warrior-hq https://warriorhq.archiveteam.org \
   --port 8001 \
   --real-shutdown
