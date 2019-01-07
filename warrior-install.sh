@@ -11,7 +11,11 @@ echo "Using '$PIP' for pip."
 
 # Check the seesaw-kit.
 echo "Checking for the latest seesaw kit..."
-seesaw_branch=master
+if [ -z "$DOCKER" ]
+  seesaw_branch=$( git rev-parse --abbrev-ref HEAD )
+else
+  seesaw_branch=master
+fi
 SEESAW_VERSION=$( git ls-remote https://github.com/ArchiveTeam/seesaw-kit.git ${seesaw_branch} | cut -f 1 )
 if ! sudo $PIP freeze | grep -q $SEESAW_VERSION
 then
@@ -64,4 +68,3 @@ rm -rf /home/warrior/warrior-code2/data
 
 # Disable mlocate
 sudo rm -f /etc/cron.daily/mlocate
-
