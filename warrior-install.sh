@@ -52,6 +52,7 @@ fi
 # Check the seesaw-kit.
 echo "Checking for the latest seesaw kit..."
 if [ -z "$DOCKER" ]
+then
   seesaw_branch=$( git rev-parse --abbrev-ref HEAD )
 else
   seesaw_branch=master
